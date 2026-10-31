@@ -39,12 +39,6 @@ const schema = z.object({
   email: z.union([z.literal(""), z.string().trim().email("Enter a valid email").max(255)]),
 });
 
-const NAV = [
-  ["Home", "https://anoneurx.com/en-us/"],
-  ["Projects", "https://anoneurx.com/en-us/opensource/projects"],
-  ["Community", "https://anoneurx.com/en-us/opensource/community"],
-  ["Contact", "https://anoneurx.com/en-us/opensource/contact"],
-];
 
 function LynxFeedback() {
   const [category, setCategory] = useState<(typeof CATEGORIES)[number]["id"]>("bug");
@@ -79,11 +73,6 @@ function LynxFeedback() {
         <a href="https://anoneurx.com/en-us/" aria-label="Anoneurx">
           <img src={logo} alt="Anoneurx" className="h-10 w-10 object-contain" />
         </a>
-        <nav className="hidden gap-8 text-sm font-medium md:flex">
-          {NAV.map(([l, h]) => (
-            <a key={l} href={h} className="text-foreground/80 transition-colors hover:text-foreground">{l}</a>
-          ))}
-        </nav>
         <span className="text-sm font-semibold">Feedback</span>
       </header>
 
@@ -109,7 +98,7 @@ function LynxFeedback() {
           </ul>
         </section>
 
-        <section className="rounded-3xl border border-border bg-card p-6 shadow-glow backdrop-blur-xl md:p-8">
+        <section className="rounded-[5px] border border-border bg-card p-6 shadow-glow backdrop-blur-xl md:p-8">
           {done ? (
             <div className="flex h-full flex-col items-center justify-center py-16 text-center">
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
@@ -119,7 +108,7 @@ function LynxFeedback() {
               <p className="mt-2 text-muted-foreground">Your feedback is on its way to the LYNX team.</p>
               <button
                 onClick={() => { setDone(false); setMessage(""); setRating(null); }}
-                className="mt-8 rounded-full border border-border bg-secondary px-6 py-2.5 text-sm font-medium transition-colors hover:bg-accent"
+                className="mt-8 rounded-[5px] border border-border bg-secondary px-6 py-2.5 text-sm font-medium transition-colors hover:bg-accent"
               >
                 Send more feedback
               </button>
@@ -188,10 +177,17 @@ function LynxFeedback() {
               <button
                 type="submit"
                 disabled={sending}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-[5px] bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
               >
                 {sending ? "Sending…" : "Send feedback"} <ArrowRight className="h-4 w-4" />
               </button>
+
+              <p className="text-center text-xs text-muted-foreground">
+                Prefer email? Write to us at{" "}
+                <a href="mailto:feedback@anoneurx.com" className="text-primary underline underline-offset-2 hover:opacity-90">
+                  feedback@anoneurx.com
+                </a>
+              </p>
             </form>
           )}
         </section>
