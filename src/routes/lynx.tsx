@@ -152,7 +152,7 @@ function LynxFeedback() {
                 <div className="mt-3 flex gap-1">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button type="button" key={n} aria-label={`${n} stars`} onClick={() => setRating(rating === n ? null : n)}>
-                      <Star className={cn("h-7 w-7 transition-colors", rating && n <= rating ? "fill-glow-gold text-glow-gold" : "text-muted-foreground")} />
+                      <Star className={cn("h-7 w-7 transition-colors", rating && n <= rating ? "fill-primary text-primary" : "text-muted-foreground")} />
                     </button>
                   ))}
                 </div>
