@@ -4,7 +4,7 @@ import { z } from "zod";
 import { ArrowRight, Check, Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
-import logo from "@/assets/anoneurx-logo.jpeg";
+import logo from "@/assets/anoneurx-logo.png";
 
 export const Route = createFileRoute("/lynx")({
   head: () => ({
