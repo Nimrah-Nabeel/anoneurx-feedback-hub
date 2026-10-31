@@ -4,6 +4,7 @@ import { z } from "zod";
 import { ArrowRight, Check, Star } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/anoneurx-logo.png";
 
 export const Route = createFileRoute("/lynx")({
   head: () => ({
@@ -33,13 +34,13 @@ const CATEGORIES = [
 
 const schema = z.object({
   category: z.enum(["bug", "feature", "search_quality", "privacy", "other"]),
-  rating: z.number().int().min(1).max(5).nullable(),
-  message: z.string().trim().min(5, "Please write at least 5 characters").max(4000),
+  rating: z.number({ message: "Please select a star rating" }).int().min(1).max(5),
+  message: z.string().trim().min(1, "Please write your feedback").max(4000),
   email: z.union([z.literal(""), z.string().trim().email("Enter a valid email").max(255)]),
 });
 
 const NAV = [
-  ["Home", "https://anoneurx.com/en-us/opensource/"],
+  ["Home", "https://anoneurx.com/en-us/"],
   ["Projects", "https://anoneurx.com/en-us/opensource/projects"],
   ["Community", "https://anoneurx.com/en-us/opensource/community"],
   ["Contact", "https://anoneurx.com/en-us/opensource/contact"],
@@ -57,8 +58,8 @@ function LynxFeedback() {
   async function submit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    const parsed = schema.safeParse({ category, rating, message, email });
-    if (!parsed.success) return setError(parsed.error.issues[0].message);
+    const parsed = schema.safeParse({ category, rating: rating ?? undefined, message, email });
+    if (!parsed.success) return setError(parsed.error.issues[0]?.message ?? "Please check the form");
     setSending(true);
     const { error } = await supabase.from("feedback").insert({
       project: "lynx",
@@ -75,8 +76,8 @@ function LynxFeedback() {
   return (
     <div className="bg-scene min-h-screen text-foreground">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
-        <a href="https://anoneurx.com/en-us/opensource/" className="text-2xl font-bold tracking-tight" aria-label="Anoneurx">
-          <span className="text-gradient">Λ</span>
+        <a href="https://anoneurx.com/en-us/" aria-label="Anoneurx">
+          <img src={logo} alt="Anoneurx" className="h-10 w-10 object-contain" />
         </a>
         <nav className="hidden gap-8 text-sm font-medium md:flex">
           {NAV.map(([l, h]) => (
@@ -147,7 +148,7 @@ function LynxFeedback() {
               </div>
 
               <div>
-                <label className="text-sm font-medium">How's your experience? <span className="text-muted-foreground">(optional)</span></label>
+                <label className="text-sm font-medium">How's your experience?</label>
                 <div className="mt-3 flex gap-1">
                   {[1, 2, 3, 4, 5].map((n) => (
                     <button type="button" key={n} aria-label={`${n} stars`} onClick={() => setRating(rating === n ? null : n)}>
