@@ -184,7 +184,7 @@ function LynxFeedback() {
 
               <p className="text-center text-xs text-muted-foreground">
                 Prefer email? Write to us at{" "}
-                <a href="mailto:feedback@anoneurx.com" className="text-primary underline underline-offset-2 hover:opacity-90">
+                <a href="mailto:feedback@anoneurx.com" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:opacity-90">
                   feedback@anoneurx.com
                 </a>
               </p>
