@@ -59,7 +59,7 @@ function LynxFeedback() {
     e.preventDefault();
     setError(null);
     const parsed = schema.safeParse({ category, rating: rating ?? undefined, message, email });
-    if (!parsed.success) return setError(parsed.error.issues[0].message);
+    if (!parsed.success) return setError(parsed.error.issues[0]?.message ?? "Please check the form");
     setSending(true);
     const { error } = await supabase.from("feedback").insert({
       project: "lynx",
