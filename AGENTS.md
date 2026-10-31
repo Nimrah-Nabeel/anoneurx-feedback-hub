@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Feedback is stored in the `feedback` table (anon insert-only, no public reads); each project gets its own route like /lynx with `project` set accordingly. Why: one store for all Anoneurx project feedback.
