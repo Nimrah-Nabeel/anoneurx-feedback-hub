@@ -108,7 +108,7 @@ function LynxFeedback() {
               <p className="mt-2 text-muted-foreground">Your feedback is on its way to the LYNX team.</p>
               <button
                 onClick={() => { setDone(false); setMessage(""); setRating(null); }}
-                className="mt-8 rounded-full border border-border bg-secondary px-6 py-2.5 text-sm font-medium transition-colors hover:bg-accent"
+                className="mt-8 rounded-[5px] border border-border bg-secondary px-6 py-2.5 text-sm font-medium transition-colors hover:bg-accent"
               >
                 Send more feedback
               </button>
